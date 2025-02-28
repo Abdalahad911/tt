@@ -30,7 +30,7 @@ function logout() {
   if (document.querySelector(".shape") != null) {
     showShape();
   }
-  window.location.href = "http://127.0.0.1:5500/index.html";
+  window.location.href = "index.html";
   if (window.location.href == "http://127.0.0.1:5500/profile.html") {
     console.log("red");
   }

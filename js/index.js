@@ -158,7 +158,7 @@ function getPosts(page) {
 function showProfile(id, img) {
   console.log(id);
   if (window.localStorage.getItem("token")) {
-    window.location.href = `http://127.0.0.1:5500/profile.html?postid=${id}`;
+    window.location.href = `profile.html?postid=${id}`;
   } else {
     alert("LOGIN FIRST PLEAAAASE");
   }
@@ -220,7 +220,7 @@ function postClick(postid) {
 
     console.log(postid);
     window.localStorage.setItem("id", `${postid}`);
-    window.location.href = `http://127.0.0.1:5500/postDetails.html?postid=${postid}`;
+    window.location.href = `postDetails.html?postid=${postid}`;
   } else {
     alert("LOGIN FIRST PLEAAAAAASE");
   }

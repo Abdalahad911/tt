@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- axios  -->
+  <script src="node_modules/axios/dist/axios.min.js"></script>
+  <style>
+    #logout .information img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .navbar {
+      background-color: white !important;
+      border-radius: 4px;
+      box-shadow: 0px 3px 3px 0px #aaa;
+    }
+
+    #logout {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      gap: 20px;
+    }
+
+    #logout .information span {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .main {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    body {
+      background-color: #f0ecff;
+    }
+
+    .navbar {
+      background-color: white !important;
+      border-radius: 4px;
+      box-shadow: 0px 3px 3px 0px #aaa;
+    }
+
+    .main {
+      height: calc(100vh - 130px);
+    }
+
+    .posts {
+      margin: 40px auto;
+      padding-bottom: 40px;
+    }
+
+    .card-header {
+      user-select: none;
+    }
+
+    .posts .card {
+      box-shadow: 0px 5px 5px -3px #aaa;
+    }
+
+    .posts .card:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    .posts .card .card-header img {
+      width: 40px;
+      border-radius: 50%;
+      height: 40px;
+      border: 1.5px solid #aaa;
+      cursor: pointer;
+    }
+
+    .posts .card .card-header span {
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .posts .card .card-body img {
+      width: 100%;
+    }
+
+    .posts .card .card-body img+span {
+      color: #777;
+      display: flex;
+      margin-top: 4px;
+    }
+
+    .posts .card .card-body .card-title {}
+
+    .posts .card .card-body .card-text {}
+
+    .posts .card .card-body hr {
+      border: 1px solid #777;
+    }
+
+
+
+    .comment #tags {
+      display: inline-flex;
+      gap: 20px;
+    }
+
+    .comment #tags .tag {}
+
+    #logout {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      gap: 20px;
+    }
+
+    #logout .information {}
+
+    #logout .information img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    #logout .information span {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #logout .information .shape {}
+
+    .shape {
+      width: 50px;
+      font-size: 40px;
+      height: 50px;
+      color: white;
+      background-color: rgb(0, 72, 255);
+      border-radius: 50%;
+      text-align: center;
+      align-content: center;
+      position: fixed;
+      right: 150px;
+      bottom: 50px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      display: none;
+      cursor: pointer;
+    }
+
+    #tags span {
+      background-color: #777;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      align-content: center;
+
+    }
+
+    .comments {
+      background-color: #dddddd;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 10px 0;
+      margin-bottom: 20px;
+    }
+
+
+
+    .comments h4 {
+      padding: 0;
+      margin: 0px;
+    }
+
+    .at {
+      display: block;
+    }
+
+    .comments .info {
+      display: flex;
+      gap: 10px;
+      align-content: center;
+      align-items: center;
+      font-weight: bolder;
+      text-transform: capitalize;
+    }
+
+    .comments img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .comments .title {
+      padding-left: 20px;
+      font-size: 20px;
+    }
+
+    .all {
+      display: none;
+    }
+
+    .block {
+      display: block;
+    }
+
+    .footer {
+      display: flex;
+      width: 100%;
+      padding: 10px;
+      justify-content: space-between;
+    }
+
+    .footer input {
+      border: none;
+      border-bottom: 2px solid #035bc7;
+      border-top: 2px solid #035bc7;
+      border-left: 2px solid #035bc7;
+      padding: 10px;
+      /* flex-grow: 1; */
+      flex-basis: 70%;
+      outline: none;
+    }
+
+    .footer button {
+      border: none;
+      border-bottom: 2px solid #035bc7;
+      border-top: 2px solid #035bc7;
+      border-right: 2px solid #035bc7;
+      padding: 10px 20px;
+      outline: none;
+      background-color: #035bc7;
+      color: white;
+      /* flex-grow: 1; */
+      flex-basis: 30%;
+    }
+
+    @media (max-width:767px) {
+      .footer {
+        width: 100%;
+      }
+
+      .footer input {
+        width: 70%;
+      }
+
+      .footer button {}
+    }
+
+    body {
+      background-color: #f0ecff;
+    }
+
+    .navbar {
+      background-color: white !important;
+      border-radius: 4px;
+      box-shadow: 0px 3px 3px 0px #aaa;
+    }
+
+    .main {
+      height: calc(100vh - 130px);
+    }
+
+    #posts {
+      margin: 40px auto 0;
+      padding-bottom: 40px;
+    }
+
+    .card-header {
+      user-select: none;
+
+    }
+
+    #posts .card {
+      box-shadow: 0px 5px 5px -3px #aaa;
+    }
+
+    #posts .card:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    #posts .card .card-header img {
+      width: 40px;
+      border-radius: 50%;
+      height: 40px;
+      border: 1.5px solid #aaa;
+      cursor: pointer;
+    }
+
+    #posts .card .card-header span {
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    #posts .card .card-body img {
+      width: 100%;
+    }
+
+    #posts .card .card-body img+span {
+      color: #777;
+      display: flex;
+      margin-top: 4px;
+    }
+
+    #posts .card .card-body .card-title {}
+
+    #posts .card .card-body .card-text {}
+
+    #posts .card .card-body hr {
+      border: 1px solid #777;
+    }
+
+    #posts .card .card-body {
+      cursor: pointer;
+    }
+
+    .comment #tags {
+      display: inline-flex;
+      gap: 20px;
+    }
+
+    .comment #tags .tag {}
+
+    #logout {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      gap: 20px;
+    }
+
+    #logout .information {}
+
+    #logout .information img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    #logout .information span {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #logout .information .shape {}
+
+    .shape {
+      width: 50px;
+      font-size: 40px;
+      height: 50px;
+      color: white;
+      background-color: rgb(0, 72, 255);
+      border-radius: 50%;
+      text-align: center;
+      align-content: center;
+      position: fixed;
+      right: 150px;
+      bottom: 50px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      display: none;
+      cursor: pointer;
+    }
+
+    @media (max-width:767px) {
+      .shape {
+        right: 20px;
+        height: 30px;
+        width: 30px;
+        font-size: 20px;
+      }
+
+    }
+
+    .edit {
+      height: 100%;
+      padding: 5px 30px;
+      border: none;
+      background-color: #0580f3;
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      /* margin: 0 20px; */
+      float: right;
+    }
+
+    .delete {
+      height: 100%;
+      padding: 5px 20px;
+      margin-left: 10px;
+      border: none;
+      background-color: rgb(226, 2, 2);
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      /* margin: 0 20px; */
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- MODALS -->
+  <!-- LOGIN -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Username</label>
+              <input type="text" class="form-control" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Password</label>
+              <input type="password" class="form-control" id="recipient-name">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- LOGIN //// -->
+  <!-- register modal -->
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Username</label>
+              <input type="text" class="form-control user-name" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Password</label>
+              <input type="password" class="form-control" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Name</label>
+              <input type="text" class="form-control name" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Email</label>
+              <input type="email" class="form-control" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">image</label>
+              <input type="file" class="form-control" id="recipient-name">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- register modal //// -->
+  <!-- post modal -->
+  <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New Post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Title</label>
+              <input type="text" class="form-control user-name" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Image</label>
+              <input type="file" class="form-control" id="recipient-name">
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- post modal //// -->
+
+  <!-- MODALS //// -->
+
+  <!-- ==== Alerts ===== -->
+  <!-- login -->
+  <div class="container ">
+    <div id="successAlert" class="show fade" style="position: fixed; z-index: 333;width: 30%;bottom: 0; right: 0;">
+    </div>
+  </div>
+  <!-- login //// -->
+  <!-- logout -->
+
+  <!-- logout //// -->
+  <!-- ==== Alerts ///===== -->
+  <div class="container d-flex justify-content-center ">
+    <!-- start  nav -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary pt-3 col-9">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Tarmeez</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+          </ul>
+
+          <div class="d-flex w-100 justify-content-end" id="logout">
+            <div class="information">
+              <img src="./images/post.jpg" alt="">
+              <span>ahmed</span>
+            </div>
+            <button onclick="logout()" type="button" class="btn btn-danger">Logout</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- end nav -->
+    <!-- main -->
+
+    <!-- main//// -->
+  </div>
+  <div class="container col-7  mt-5 main">
+    <div class="name"><span>ahmed</span> post.</div>
+    <!-- ================= -->
+    <div class="posts mt-5">
+
+    </div>
+  </div>
+  <!-- ========================== -->
+
+  <script src="js/mainLogic.js"></script>
+  <script>
+    // let uuuu=${window.localStorage.getItem("id")}
+    let tagss = [1, 4]
+    function poost() {
+      axios
+        .get(`https://tarmeezacademy.com/api/v1/posts/${window.localStorage.getItem("id")}`, {
+          headers: {
+            Authorization: "3239|6UuShuhc2THqV6nxFAsHRbeC81k0Yk3n5t0OAm6f"
+          }
+        })
+        .then(r => {
+          if (window.localStorage.getItem("id")) {
+            let name = document.querySelector(".name span");
+            console.log(r.data.data);
+            name.innerHTML = r.data.data.author.username
+
+            // create card
+            let posts = document.querySelector(".posts")
+            console.log(posts);
+            let card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+      <div class="card-header">
+          <img src=${r.data.data.author.profile_image} alt="">
+          <span>${r.data.data.author.name}</span>
+        </div>
+        <div class="card-body">
+          <img src=${r.data.data.image} alt="" loading=lazy>
+          <span>${r.data.data.created_at}</span>
+          <h5 class="card-title">${r.data.data.title}</h5>
+          <p class="card-text">${r.data.data.body}</p>
+          
+          <hr>
+          <div class="comment">
+            <i class="bi bi-pen"></i>
+            <span>${r.data.data.comments_count}</span><span style="cursor:pointer;"onclick=showComments()> Comments </span><span id=tags>
+              </span>
+               <div class="footer mt-5">
+        <input type="text"> <button onclick=addComment()>add</button>
+        </div>
+          </div>
+        </div>
+        <div class="all">
+      </div>
+      
+      
+      `;
+            let co = r.data.data.comments
+
+
+            console.log(co);
+
+            posts.innerHTML = ""
+            posts.append(card)
+            let tags = document.querySelector("#tags")
+            for (let i = 0; i < tagss.length; i++) {
+              let tag = `
+            <span>${tagss[i]}</span>
+            `
+              tags.innerHTML += tag
+            }
+
+            let all = document.querySelector(".all")
+            for (let j = 0; j < co.length; j++) {
+              let comments = document.createElement("div")
+              comments.classList.add("comments")
+              comments.innerHTML = `
+                <div class="info"><img src=${co[j].author.profile_image} alt="">
+                <h4>${co[j].author.name}</h4>
+              </div>
+            <div class="title">${co[j].body}</div>
+            `
+              all.append(comments)
+
+            }
+
+          }
+        });
+    }
+    poost()
+    function showComments() {
+      console.log(document.querySelector(".all").classList.toggle("block"));
+    }
+    function addComment() {
+      console.log("red");
+
+
+      axios.post(`https://tarmeezacademy.com/api/v1/posts/${window.localStorage.getItem("id")}/comments`, {
+        "body": document.querySelector(".footer input").value
+      }, {
+        headers: {
+          AUTHORIZATION: `Bearer ${window.localStorage.getItem("token")}`
+
+        }
+      }).then(r => {
+        poost()
+
+      })
+    }
+
+  </script>
+</body>
+
+</html>
